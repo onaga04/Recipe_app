@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Recipe Application</title>
+</head>
+<body>
+  <h1>Recipe Application</h1>
+
+  ## Add Recipe
+  <label for="recipeTitle">Title:</label>
+  <input type="text" id="recipeTitle" />
+
+  <label for="recipeIngredients">Ingredients (comma-separated):</label>
+  <input type="text" id="recipeIngredients" />
+
+  <label for="recipeInstructions">Instructions:</label>
+  <textarea id="recipeInstructions"></textarea>
+
+  <button onclick="addRecipe()">Add Recipe</button>
+
+  ## Search Recipe
+  <label for="searchTitle">Search by Title:</label>
+  <input type="text" id="searchTitle" />
+
+  <button onclick="searchRecipes()">Search</button>
+
+  <ul id="recipeList"></ul>
+
+  <script>
+    function addRecipe() {
+      const recipeTitle = document.getElementById('recipeTitle').value;
+      const recipeIngredients = document.getElementById('recipeIngredients').value.split(',');
+      const recipeInstructions = document.getElementById('recipeInstructions').value;
+
+      const newRecipe = {
+        title: recipeTitle,
+        ingredients: recipeIngredients,
+        instructions: recipeInstructions
+      };
+
+      // Perform an HTTP POST request to add the new recipe
+      fetch('/api/recipes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newRecipe)
+      })
+        .then(response => response.json())
+        .then(recipe => console.log('Added Recipe:', recipe))
+        .catch(error => console.log(error));
+    }
+
+    function searchRecipes() {
+      const searchTitle = document.getElementById('searchTitle').value;
+
+      // Perform an HTTP GET request to search for recipes
+      fetch(`/api/recipes/search?title=${searchTitle}`)
+        .then(response => response.json())
+        .then(recipes => displayRecipes(recipes))
+        .catch(error => console.log(error));
+    }
+
+    function displayRecipes(recipes) {
+      const recipeList = document.getElementById('recipeList');
+      recipeList.innerHTML = '';
+
+      recipes.forEach(recipe => {
+        const recipeItem = document.createElement('li');
+        recipeItem.innerHTML = `
+          <h3>${recipe.title}</h3>
+          <ul>
+            ${recipe.ingredients
