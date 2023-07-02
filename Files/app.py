@@ -1,7 +1,17 @@
 from flask import Flask, render_template
 import time
 
-app = Flask(__name__)
+app1 = Flask(__name__)
+app2 = Flask(__name__)
+app3 = Flask(__name__)
+app4 = Flask(__name__)
+app5 = Flask(__name__)
+app6 = Flask(__name__)
+app7 = Flask(__name__)
+app8 = Flask(__name__)
+app9 = Flask(__name__)
+app10 = Flask(__name__)
+
 
 recipes = [
     {
@@ -55,4 +65,15 @@ def recipe(title):
     return response
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app1.run(debug=True, port=5000)
+    app2.run(debug=True, port=5001)
+    app3.run(debug=True, port=5001)
+    app4.run(debug=True, port=5001)
+    app5.run(debug=True, port=5001)
+    app6.run(debug=True, port=5001)
+    app7.run(debug=True, port=5001)
+    app8.run(debug=True, port=5001)
+    app9.run(debug=True, port=5001)
+    app10.run(debug=True, port=5001)
+
+
