@@ -85,13 +85,13 @@ def recipe(title):
 if __name__ == '__main__':
     app1.run(debug=True, port=5000)
     app2.run(debug=True, port=5001)
-    app3.run(debug=True, port=5001)
-    app4.run(debug=True, port=5001)
-    app5.run(debug=True, port=5001)
-    app6.run(debug=True, port=5001)
-    app7.run(debug=True, port=5001)
-    app8.run(debug=True, port=5001)
-    app9.run(debug=True, port=5001)
-    app10.run(debug=True, port=5001)
+    app3.run(debug=True, port=5002)
+    app4.run(debug=True, port=5003)
+    app5.run(debug=True, port=5004)
+    app6.run(debug=True, port=5005)
+    app7.run(debug=True, port=5006)
+    app8.run(debug=True, port=5007)
+    app9.run(debug=True, port=5008)
+    app10.run(debug=True, port=5009)
 
 
