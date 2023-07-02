@@ -27,7 +27,16 @@ recipes = [
     # Add more recipe data as needed
 ]
 
-@app.route('/')
+@app1.route('/')
+@app2.route('/')
+@app3.route('/')
+@app4.route('/')
+@app5.route('/')
+@app6.route('/')
+@app7.route('/')
+@app8.route('/')
+@app9.route('/')
+@app10.route('/')
 def home():
     start_time = time.time()
     # Your application logic here
@@ -40,7 +49,16 @@ def home():
     app.logger.info(f"Response time for home route: {response_time} seconds")
     return response
     
-@app.route('/recipe/<title>')
+@app1.route('/recipe/<title>')
+@app2.route('/recipe/<title>')
+@app3.route('/recipe/<title>')
+@app4.route('/recipe/<title>')
+@app5.route('/recipe/<title>')
+@app6.route('/recipe/<title>')
+@app7.route('/recipe/<title>')
+@app8.route('/recipe/<title>')
+@app9.route('/recipe/<title>')
+@app10.route('/recipe/<title>')
 def recipe(title):
     # Find the recipe with the given title
     start_time = time.time()
