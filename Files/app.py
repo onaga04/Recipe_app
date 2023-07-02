@@ -12,7 +12,6 @@ app8 = Flask(__name__)
 app9 = Flask(__name__)
 app10 = Flask(__name__)
 
-
 recipes = [
     {
         'title': 'Pasta Carbonara',
@@ -41,14 +40,13 @@ def home():
     start_time = time.time()
     # Your application logic here
     # ...
-    return render_template('index.html', recipes=recipes)
     response = render_template('index.html', recipes=recipes)
     end_time = time.time()
     response_time = end_time - start_time
     # Log the response time
-    app.logger.info(f"Response time for home route: {response_time} seconds")
+    app1.logger.info(f"Response time for home route: {response_time} seconds")
     return response
-    
+
 @app1.route('/recipe/<title>')
 @app2.route('/recipe/<title>')
 @app3.route('/recipe/<title>')
@@ -60,12 +58,9 @@ def home():
 @app9.route('/recipe/<title>')
 @app10.route('/recipe/<title>')
 def recipe(title):
-    # Find the recipe with the given title
     start_time = time.time()
-
     # Your application logic here
     # ...
-
     # Find the recipe with the given title
     recipe = next((r for r in recipes if r['title'].lower() == title.lower()), None)
 
@@ -76,9 +71,8 @@ def recipe(title):
 
     end_time = time.time()
     response_time = end_time - start_time
-
     # Log the response time
-    app.logger.info(f"Response time for recipe route: {response_time} seconds")
+    app1.logger.info(f"Response time for recipe route: {response_time} seconds")
 
     return response
 
@@ -93,5 +87,3 @@ if __name__ == '__main__':
     app8.run(debug=True, port=5007)
     app9.run(debug=True, port=5008)
     app10.run(debug=True, port=5009)
-
-
