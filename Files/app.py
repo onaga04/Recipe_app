@@ -1,17 +1,6 @@
 from flask import Flask, render_template
 import time
 
-app1 = Flask(__name__)
-app2 = Flask(__name__)
-app3 = Flask(__name__)
-app4 = Flask(__name__)
-app5 = Flask(__name__)
-app6 = Flask(__name__)
-app7 = Flask(__name__)
-app8 = Flask(__name__)
-app9 = Flask(__name__)
-app10 = Flask(__name__)
-
 recipes = [
     {
         'title': 'Pasta Carbonara',
@@ -26,64 +15,48 @@ recipes = [
     # Add more recipe data as needed
 ]
 
-@app1.route('/')
-@app2.route('/')
-@app3.route('/')
-@app4.route('/')
-@app5.route('/')
-@app6.route('/')
-@app7.route('/')
-@app8.route('/')
-@app9.route('/')
-@app10.route('/')
-def home():
-    start_time = time.time()
-    # Your application logic here
-    # ...
-    response = render_template('index.html', recipes=recipes)
-    end_time = time.time()
-    response_time = end_time - start_time
-    # Log the response time
-    app1.logger.info(f"Response time for home route: {response_time} seconds")
-    return response
+def create_app(port):
+    app = Flask(__name__)
 
-@app1.route('/recipe/<title>')
-@app2.route('/recipe/<title>')
-@app3.route('/recipe/<title>')
-@app4.route('/recipe/<title>')
-@app5.route('/recipe/<title>')
-@app6.route('/recipe/<title>')
-@app7.route('/recipe/<title>')
-@app8.route('/recipe/<title>')
-@app9.route('/recipe/<title>')
-@app10.route('/recipe/<title>')
-def recipe(title):
-    start_time = time.time()
-    # Your application logic here
-    # ...
-    # Find the recipe with the given title
-    recipe = next((r for r in recipes if r['title'].lower() == title.lower()), None)
+    @app.route('/')
+    def home():
+        start_time = time.time()
+        # Your application logic here
+        # ...
+        response = render_template('index.html', recipes=recipes)
+        end_time = time.time()
+        response_time = end_time - start_time
+        # Log the response time
+        app.logger.info(f"Response time for home route: {response_time} seconds")
+        return response
 
-    if recipe:
-        response = render_template('recipe.html', recipe=recipe)
-    else:
-        response = 'Recipe not found'
+    @app.route('/recipe/<title>')
+    def recipe(title):
+        start_time = time.time()
+        # Your application logic here
+        # ...
+        # Find the recipe with the given title
+        recipe = next((r for r in recipes if r['title'].lower() == title.lower()), None)
 
-    end_time = time.time()
-    response_time = end_time - start_time
-    # Log the response time
-    app1.logger.info(f"Response time for recipe route: {response_time} seconds")
+        if recipe:
+            response = render_template('recipe.html', recipe=recipe)
+        else:
+            response = 'Recipe not found'
 
-    return response
+        end_time = time.time()
+        response_time = end_time - start_time
+        # Log the response time
+        app.logger.info(f"Response time for recipe route: {response_time} seconds")
+
+        return response
+
+    return app
+
 
 if __name__ == '__main__':
-    app1.run(debug=True, port=5000)
-    app2.run(debug=True, port=5001)
-    app3.run(debug=True, port=5002)
-    app4.run(debug=True, port=5003)
-    app5.run(debug=True, port=5004)
-    app6.run(debug=True, port=5005)
-    app7.run(debug=True, port=5006)
-    app8.run(debug=True, port=5007)
-    app9.run(debug=True, port=5008)
-    app10.run(debug=True, port=5009)
+    # Start each server on a different port
+    ports = [5000, 5001, 5002, 5003, 5004, 5005, 5006, 5007, 5008, 5009]
+    apps = [create_app(port) for port in ports]
+
+    for i, app in enumerate(apps):
+        app.run(debug=True, port=ports[i])
